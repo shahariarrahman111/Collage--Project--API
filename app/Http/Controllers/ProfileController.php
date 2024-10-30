@@ -78,7 +78,7 @@ class ProfileController
 
         $profile = Profile::updateOrCreate(
             ['user_id' => Auth::id()],
-            $request->only(['division', 'city', 'upozilz','postOffice'])
+            $request->only(['division', 'city', 'upozila','postOffice'])
         );
 
         return response()->json(['message' => 'Profile updated successfully', 'profile' => $profile]);

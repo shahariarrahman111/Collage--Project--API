@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ForgetPasswordController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -39,8 +40,21 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/add/wishlist', [WishListController::class, 'addToWishlist']);
     Route::get('/show/wishlist', [WishListController::class, 'getUserWishlist']);
     Route::delete('/delete/wishlist/{id}', [WishListController::class, 'removeFromWishlist']);
+    Route::post('/invoice/create', [InvoiceController::class, 'InvoiceCreate'])->name('invoice.create'); 
+    Route::get('/invoices', [InvoiceController::class, 'InvoiceList'])->name('invoice.list'); 
+    Route::get('/invoice/products/{invoice_id}', [InvoiceController::class, 'InvoiceProductList'])->name('invoice.product.list'); 
 
 });
+
+
+//  SSLCommerce er Route
+Route::get('/payment/success', [InvoiceController::class, 'PaymentSuccess'])->name('payment.success');
+Route::get('/payment/cancel', [InvoiceController::class, 'PaymentCancel'])->name('payment.cancel');
+Route::get('/payment/fail', [InvoiceController::class, 'PaymentFail'])->name('payment.fail');
+Route::post('/payment/ipn', [InvoiceController::class, 'PaymentIPN'])->name('payment.ipn');
+
+
+
 
 
 // Admin API
@@ -79,6 +93,9 @@ Route::middleware(['auth:api', 'role:admin'])->group(function () {
     Route::get('/admin/users', [ProfileController::class, 'UserProfileList'])->name('admin.users.index');
     Route::get('/admin/users/profile/{id}', [ProfileController::class, 'adminShowUserProfile'])->name('admin.users.profile');
 
+    // Admin Invoice
+    Route::get('/admin/invoices', [InvoiceController::class, 'InvoiceList'])->name('admin.invoice.list'); 
+    Route::get('/admin/invoice/products/{invoice_id}', [InvoiceController::class, 'InvoiceProductList'])->name('admin.invoice.product.list'); 
 
 
   

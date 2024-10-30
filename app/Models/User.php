@@ -33,5 +33,11 @@ class User extends Authenticatable
     }
 
 
+    public function shippingDetails()
+    {
+        return $this->hasMany(ShippingDetail::class);
+    }
+
+
 
 }

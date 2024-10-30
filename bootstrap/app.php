@@ -18,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
             except: ['stripe/*', 'user-registration', 'user-login', 'user-logout','profile/create','profile','profile/update','otp/create',
             'otp/verify','reset-password','categories/create', 'categories/update/{id}' ,'categories/delete/{id}','product-create','product-update/{id}',
             'product-delete/{id}','dashboard','admin/profile/update','cart-add','orders','admin/orders/{userId}','add/wishlist',
-            'delete/wishlist/{id}']
+            'delete/wishlist/{id}','invoice/create','payment/ipn']
         );
 
        
